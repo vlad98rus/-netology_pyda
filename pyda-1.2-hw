@@ -1,0 +1,309 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Задание 1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Дан список с визитами по городам и странам. \n",
+    "Напишите код, который возвращает отфильтрованный список geo_logs, содержащий только визиты из России."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[{'visit1': ['Москва', 'Россия']}, {'visit3': ['Владимир', 'Россия']}, {'visit7': ['Тула', 'Россия']}, {'visit8': ['Тула', 'Россия']}, {'visit9': ['Курск', 'Россия']}, {'visit10': ['Архангельск', 'Россия']}]\n"
+     ]
+    }
+   ],
+   "source": [
+    "geo_logs = [\n",
+    "    {'visit1': ['Москва', 'Россия']},\n",
+    "    {'visit2': ['Дели', 'Индия']},\n",
+    "    {'visit3': ['Владимир', 'Россия']},\n",
+    "    {'visit4': ['Лиссабон', 'Португалия']},\n",
+    "    {'visit5': ['Париж', 'Франция']},\n",
+    "    {'visit6': ['Лиссабон', 'Португалия']},\n",
+    "    {'visit7': ['Тула', 'Россия']},\n",
+    "    {'visit8': ['Тула', 'Россия']},\n",
+    "    {'visit9': ['Курск', 'Россия']},\n",
+    "    {'visit10': ['Архангельск', 'Россия']}\n",
+    "]\n",
+    "geo_logs_rus = []\n",
+    "for visit in geo_logs:\n",
+    "    if list (visit.values () )[0][1] == 'Россия':\n",
+    "        geo_logs_rus.append ( visit )\n",
+    "print ( geo_logs_rus )"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Задание 2"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Выведите на экран все уникальные гео-ID из значений словаря ids. Т. е. список вида [213, 15, 54, 119, 98, 35]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[213, 15, 54, 119, 98, 35]\n"
+     ]
+    }
+   ],
+   "source": [
+    "ids = {'user1': [213, 213, 213, 15, 213], \n",
+    "       'user2': [54, 54, 119, 119, 119], \n",
+    "       'user3': [213, 98, 98, 35]}\n",
+    "ids_list = []\n",
+    "for values in list(ids.values()):\n",
+    "# print(values)\n",
+    "  for value in values:\n",
+    "#     print(value)\n",
+    "   if value not in ids_list:\n",
+    "    ids_list.append(value)\n",
+    "print(ids_list)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Задание 3"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Дан список поисковых запросов. Получить распределение количества слов в них. \n",
+    "Т. е. поисковых запросов из одного - слова 5%, из двух - 7%, из трех - 3% и т.д."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 69,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "3х-словных запросов: 57.14%\n",
+      "2х-словных запросов: 42.86%\n"
+     ]
+    }
+   ],
+   "source": [
+    "queries = [\n",
+    "    'смотреть сериалы онлайн',\n",
+    "    'новости спорта',\n",
+    "    'афиша кино',\n",
+    "    'курс доллара',\n",
+    "    'сериалы этим летом',\n",
+    "    'курс по питону',\n",
+    "    'сериалы про спорт',\n",
+    "]\n",
+    "frequency = {}\n",
+    "for i in queries:\n",
+    "    if len(i.split(' ')) not in frequency:\n",
+    "        frequency[len(i.split(' '))] = 1\n",
+    "    else:\n",
+    "        frequency[len(i.split(' '))] += 1\n",
+    "for key, value in frequency.items():\n",
+    "    print(f\"{key}х-словных запросов: {round(value / len(queries) * 100, 2)}%\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Задание 4"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Дана статистика рекламных каналов по объемам продаж. Напишите скрипт, который возвращает название канала с максимальным объемом.\n",
+    "Т. е. в данном примере скрипт должен возвращать 'yandex'."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 72,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Максимальный объем продаж:  120 по каналу  yandex\n"
+     ]
+    }
+   ],
+   "source": [
+    "stats = {'facebook': 55, 'yandex': 120, 'vk': 115, 'google': 99, 'email': 42, 'ok': 98}\n",
+    "max_sales = 0\n",
+    "for channel in stats:\n",
+    "    if  stats[channel] > max_sales:\n",
+    "        max_sales = stats[channel]     \n",
+    "        max_sales_channel = channel\n",
+    "print(\"Максимальный объем продаж: \", max_sales,\"по каналу \", max_sales_channel)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Задание 5"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Дан поток логов по количеству просмотренных страниц для каждого пользователя. Список отсортирован по ID пользователя. Вам необходимо написать алгоритм, который считает среднее значение просмотров на пользователя. \n",
+    "Т. е. надо посчитать отношение суммы всех просмотров к количеству уникальных пользователей."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 75,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "23.25\n"
+     ]
+    }
+   ],
+   "source": [
+    "stream = [\n",
+    "    '2018-01-01,user1,3',\n",
+    "    '2018-01-07,user1,4',\n",
+    "    '2018-03-29,user1,1',\n",
+    "    '2018-04-04,user1,13',\n",
+    "    '2018-01-05,user2,7',\n",
+    "    '2018-06-14,user3,4',\n",
+    "    '2018-07-02,user3,10',\n",
+    "    '2018-03-21,user4,19',\n",
+    "    '2018-03-22,user4,4',\n",
+    "    '2018-04-22,user4,8',\n",
+    "    '2018-05-03,user4,9',\n",
+    "    '2018-05-11,user4,11',\n",
+    "]\n",
+    "unique_users = []\n",
+    "total_pages = 0\n",
+    "for visit in stream:\n",
+    "    visit = visit.split(',')\n",
+    "    total_pages += int(visit[2])\n",
+    "    if visit[1] not in unique_users:\n",
+    "        unique_users.append(visit[1])\n",
+    "print(round(total_pages / len(unique_users), 2))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Задание 6"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Дана статистика рекламных кампаний по дням. Напишите алгоритм, который по паре дата-кампания ищет значение численного столбца. \n",
+    "Т. е. для даты '2018-01-01' и 'google' нужно получить число 25. \n",
+    "Считайте, что все комбинации дата-кампания уникальны."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 77,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "25\n"
+     ]
+    }
+   ],
+   "source": [
+    "stats = [\n",
+    "    ['2018-01-01', 'google', 25],\n",
+    "    ['2018-01-01', 'yandex', 65],\n",
+    "    ['2018-01-01', 'market', 89],\n",
+    "    ['2018-01-02', 'google', 574],\n",
+    "    ['2018-01-02', 'yandex', 249],\n",
+    "    ['2018-01-02', 'market', 994],\n",
+    "    ['2018-01-03', 'google', 1843],\n",
+    "    ['2018-01-03', 'yandex', 1327],\n",
+    "    ['2018-01-03', 'market', 1764],\n",
+    "]\n",
+    "date = '2018-01-01'\n",
+    "company = 'google'\n",
+    "for stat in stats:\n",
+    "    if company in stat and date in stat:\n",
+    "        print(stat[2])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
